@@ -1,40 +1,52 @@
+# Marshall, Alex - Een kroon voor koud zilver
+
 import os
 import glob
 
 # Absolute path of a file
-old_name = r"C:\Scripts\pythontestfiles\oldfile.txt"
-new_name = r"C:\Scripts\pythontestfiles\newfile.txt"
+# old_name = r"C:\Scripts\pythontestfiles\oldfile.txt"
+# new_name = r"C:\Scripts\pythontestfiles\newfile.txt"
 
 # Renaming the file
 #os.rename(old_name, new_name)
 folderLocation  = 'C:\\Scripts\\pythontestfiles\\'
 
-# for each file in location
-for name in glob.glob(folderLocation + '*,*.epub'):
-
+# for each epub file in location
+for name in glob.glob(folderLocation + '*.epub'):
+    print("-" * 100)
     # get  current filename
-    fileName = name[len(folderLocation):]
-    #print("filename: " + fileName)
+    oldFileName = name[len(folderLocation):]
+    print("filename: " + oldFileName)
 
     # get first word of file
-    lastName = fileName.split()[0]
-    # remove the comma
-    lastName = lastName[:-1]
-    #print("Last name: " + lastName)
+    
 
-    # get second word
-    firstName = fileName.split()[1]
-    #firstName = firstName[:-4]    # Later wordt dit -5 voor epub files
-    #print("First name: " + firstName)
 
-    bookTitle = fileName[(len(firstName + lastName ) + 2):]
-    #print("Book title: " + bookTitle)
 
-    affix  = os.path.splitext(name)[1]
-    #print("affix: " + affix)
+    # When the filename layout is as followed: Lastname, Firstname - bookname,
+    # we want to change that filename. we search for the comma after the first word
+    firstWord = oldFileName.split()[0]
+    if firstWord[-1] == ',':
+        print("A comma found!")
+        lastName = firstWord[:-1]
+        firstName = oldFileName.split()[1]
 
-    newFileName = firstName + " " + lastName + bookTitle
-    #print ("new name: " + newFileName)
-    print("Old filename: " + fileName)
-    print("New name:  " + name, folderLocation + newFileName)
-    os.rename(name, folderLocation + newFileName)
+    else:
+        firstName = firstWord
+        lastName = oldFileName.split()[1]
+
+    print("First name: " + firstName)
+    print("Last name: " + lastName)
+
+    bookTitleWithExtention = oldFileName.split("-", 1)[1]
+    bookTitle = bookTitleWithExtention.split(".epub", 1)[0]
+    print("Book title: " + bookTitle)
+
+    print("New file name: " + firstName + " " + lastName + " - " + bookTitle)
+
+    os.rename(folderLocation + oldFileName, folderLocation + firstName + " " + lastName + " - " + bookTitle + ".epub")
+
+
+
+
+print("-" * 100)
