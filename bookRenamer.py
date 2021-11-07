@@ -27,11 +27,13 @@ for name in glob.glob(folderLocation + '*.epub'):
         if firstWord[-1] == ',':
             print("A comma found!")
             lastNameSecondAuthor = firstWord[:-1]
-            firstNameSecondAuthor = oldFileNameSplitted.split()[1]
+            firstNameSecondAuthor = " & " + oldFileNameSplitted.split()[1]
         else:
             firstNameSecondAuthor = firstWord
             lastNameSecondAuthor = oldFileNameSplitted.split()[1]
-
+    else:
+        lastNameSecondAuthor = ""
+        firstNameSecondAuthor = ""
     # When the filename layout is as followed: Lastname, Firstname - bookname,
     # we want to change that filename. we search for the comma after the first word
     firstWord = oldFileName.split()[0]
@@ -55,7 +57,9 @@ for name in glob.glob(folderLocation + '*.epub'):
     bookTitle = bookTitleWithExtention.split(".epub", 1)[0]
     print("Book title: " + bookTitle)
 
-    print("New file name: " + firstName + " " + lastName + " - " + bookTitle)
+    newFileName = firstName + " " + lastName + firstNameSecondAuthor + " " +  lastNameSecondAuthor + " - " + bookTitle
+
+    print("New file name: " + newFileName)
 
     #os.rename(folderLocation + oldFileName, folderLocation + firstName + " " + lastName + " - " + bookTitle + ".epub")
 
