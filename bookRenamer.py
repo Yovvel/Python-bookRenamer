@@ -2,6 +2,7 @@
 
 import os
 import glob
+import re
 
 # Renaming the file
 #os.rename(old_name, new_name)
@@ -13,8 +14,6 @@ for name in glob.glob(folderLocation + '*.epub'):
     # get  current filename
     oldFileName = name[len(folderLocation):]
     print("filename: " + oldFileName)  
-
-    
 
     # if there are more authors
     if(oldFileName.find('&')):
@@ -34,6 +33,7 @@ for name in glob.glob(folderLocation + '*.epub'):
     else:
         lastNameSecondAuthor = ""
         firstNameSecondAuthor = ""
+
     # When the filename layout is as followed: Lastname, Firstname - bookname,
     # we want to change that filename. we search for the comma after the first word
     firstWord = oldFileName.split()[0]
@@ -52,10 +52,14 @@ for name in glob.glob(folderLocation + '*.epub'):
     print("First name second author: " + firstNameSecondAuthor)
     print("Last name second author: " + lastNameSecondAuthor)
     
-
+    # Get the book title
     bookTitleWithExtention = oldFileName.split("-", 1)[1]
     bookTitle = bookTitleWithExtention.split(".epub", 1)[0]
     print("Book title: " + bookTitle)
+    # remove from which year the book is from
+    bookTitle = re.sub("\([0-9][0-9][0-9][0-9]\)",'', bookTitle)
+    print("Book title: " + bookTitle)
+
 
     newFileName = firstName + " " + lastName + firstNameSecondAuthor + " " +  lastNameSecondAuthor + " - " + bookTitle
 
