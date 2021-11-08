@@ -16,7 +16,7 @@ for name in glob.glob(folderLocation + '*.epub'):
     print("filename: " + oldFileName)  
 
     # if there are more authors
-    if(oldFileName.find('&')):
+    if(re.search("&",oldFileName)):
         print("'&' found!")
         oldFileNameSplitted = oldFileName.split("&", 1)[1]
         print("splitted: " + oldFileNameSplitted)
