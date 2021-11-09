@@ -8,12 +8,21 @@ import re
 #os.rename(old_name, new_name)
 folderLocation  = 'C:\\Scripts\\pythontestfiles\\'
 
+def testFunc():
+    print("test working!")
+
+def getFileName(name):
+    # function to get the filename without it's location
+    return name[len(folderLocation):]
+
 # for each epub file in location
+
+
 for name in glob.glob(folderLocation + '*.epub'):
     print("-" * 100)
     
     # get  current filename
-    oldFileName = name[len(folderLocation):]
+    oldFileName = getFileName(name)
     print("filename: " + oldFileName)  
 
     # if there are more authors
