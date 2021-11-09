@@ -11,6 +11,7 @@ folderLocation  = 'C:\\Scripts\\pythontestfiles\\'
 # for each epub file in location
 for name in glob.glob(folderLocation + '*.epub'):
     print("-" * 100)
+    
     # get  current filename
     oldFileName = name[len(folderLocation):]
     print("filename: " + oldFileName)  
@@ -40,7 +41,9 @@ for name in glob.glob(folderLocation + '*.epub'):
     if firstWord[-1] == ',':
         print("A comma found!")
         lastName = firstWord[:-1]
-        firstName = oldFileName.split()[1]
+        firstName = oldFileName.split("-",1)[0]
+        firstName = firstName.split(",",1)[1]
+        #firstName = oldFileName.split()[1]
 
     else:
         firstName = firstWord
