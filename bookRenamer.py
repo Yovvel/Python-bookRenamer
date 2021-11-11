@@ -28,7 +28,7 @@ def getLastName(filename):
     if firstWord[-1] == ',':
         return firstWord[:-1]
     else:
-        return filename.split()[1]
+        return filename.split(' ')[1]
     
 # start of program
 
@@ -53,19 +53,19 @@ for name in glob.glob(folderLocation + '*.epub'):
         lastNameSecondAuthor = getLastName(oldFileNameLastPart)
         firstName = getFirstName(oldFileNameFirstPart)
         lastName = getLastName(oldFileNameFirstPart) + " & "
+        multipleAuthors = True
 
     else:
-        lastNameSecondAuthor = ""
-        firstNameSecondAuthor = ""
         firstName = getFirstName(oldFileName)
         lastName = getLastName(oldFileName)
+        multipleAuthors = False
 
 
     print("First name: " + firstName)
     print("Last name: " + lastName)
 
-    print("First name second author: " + firstNameSecondAuthor)
-    print("Last name second author: " + lastNameSecondAuthor)
+    # print("First name second author: " + firstNameSecondAuthor)
+    # print("Last name second author: " + lastNameSecondAuthor)
     
     # Get the book title
     bookTitleWithExtention = oldFileName.split("-", 1)[1]
@@ -73,10 +73,14 @@ for name in glob.glob(folderLocation + '*.epub'):
     print("Book title: " + bookTitle)
     # remove from which year the book is from
     bookTitle = re.sub("\([0-9][0-9][0-9][0-9]\)",'', bookTitle)
-    print("Book title: " + bookTitle)
+    print("Book title(removed year): " + bookTitle)
 
-
-    newFileName = firstName + " " + lastName + firstNameSecondAuthor + " " +  lastNameSecondAuthor + " - " + bookTitle
+    if multipleAuthors == True:
+        print("First name second author: " + firstNameSecondAuthor)
+        print("Last name second author: " + lastNameSecondAuthor)
+        newFileName = firstName + "," + lastName + firstNameSecondAuthor + "," +  lastNameSecondAuthor + ",-," + bookTitle
+    else:
+        newFileName = firstName + lastName + " -" + bookTitle
 
     print("New file name: " + newFileName)
 
