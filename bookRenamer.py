@@ -52,7 +52,7 @@ for name in glob.glob(folderLocation + '*.epub'):
         firstNameSecondAuthor = getFirstName(oldFileNameLastPart)
         lastNameSecondAuthor = getLastName(oldFileNameLastPart)
         firstName = getFirstName(oldFileNameFirstPart)
-        lastName = getLastName(oldFileNameFirstPart) + " & "
+        lastName = getLastName(oldFileNameFirstPart) + " &"
         multipleAuthors = True
 
     else:
@@ -78,7 +78,7 @@ for name in glob.glob(folderLocation + '*.epub'):
     if multipleAuthors == True:
         print("First name second author: " + firstNameSecondAuthor)
         print("Last name second author: " + lastNameSecondAuthor)
-        newFileName = firstName + "," + lastName + firstNameSecondAuthor + "," +  lastNameSecondAuthor + ",-," + bookTitle
+        newFileName = firstName + lastName + firstNameSecondAuthor +  lastNameSecondAuthor + " -" + bookTitle
     else:
         newFileName = firstName + lastName + " -" + bookTitle
 
