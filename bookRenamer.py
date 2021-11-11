@@ -8,16 +8,31 @@ import re
 #os.rename(old_name, new_name)
 folderLocation  = 'C:\\Scripts\\pythontestfiles\\'
 
-def testFunc():
-    print("test working!")
-
+# Functions
 def getFileName(name):
     # function to get the filename without it's location
     return name[len(folderLocation):]
 
+def getFirstName(fileName):
+    # When the filename layout is as followed: Lastname, Firstname - bookname,
+    # we want to change that filename. we search for the comma after the first word
+    firstWord = fileName.split()[0]
+    if firstWord[-1] == ',':
+        firstName = fileName.split("-",1)[0]
+        return firstName.split(",",1)[1]
+    else:
+        return firstWord
+
+def getLastName(filename):
+    firstWord = filename.split()[0]
+    if firstWord[-1] == ',':
+        return firstWord[:-1]
+    else:
+        return filename.split()[1]
+    
+# start of program
+
 # for each epub file in location
-
-
 for name in glob.glob(folderLocation + '*.epub'):
     print("-" * 100)
     
@@ -44,19 +59,9 @@ for name in glob.glob(folderLocation + '*.epub'):
         lastNameSecondAuthor = ""
         firstNameSecondAuthor = ""
 
-    # When the filename layout is as followed: Lastname, Firstname - bookname,
-    # we want to change that filename. we search for the comma after the first word
-    firstWord = oldFileName.split()[0]
-    if firstWord[-1] == ',':
-        print("A comma found!")
-        lastName = firstWord[:-1]
-        firstName = oldFileName.split("-",1)[0]
-        firstName = firstName.split(",",1)[1]
-        #firstName = oldFileName.split()[1]
 
-    else:
-        firstName = firstWord
-        lastName = oldFileName.split()[1]
+    firstName = getFirstName(oldFileName)
+    lastName = getLastName(oldFileName)
 
     print("First name: " + firstName)
     print("Last name: " + lastName)
