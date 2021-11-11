@@ -43,25 +43,23 @@ for name in glob.glob(folderLocation + '*.epub'):
     # if there are more authors
     if(re.search("&",oldFileName)):
         print("'&' found!")
+        oldFileNameFirstPart = oldFileName.split("&", 1)[0]
+        oldFileNameLastPart = oldFileName.split("&", 1)[1]
+        print("First part: " + oldFileNameFirstPart)
+        print("Last part: "+ oldFileNameLastPart)
         oldFileNameSplitted = oldFileName.split("&", 1)[1]
         print("splitted: " + oldFileNameSplitted)
+        firstNameSecondAuthor = getFirstName(oldFileNameLastPart)
+        lastNameSecondAuthor = getLastName(oldFileNameLastPart)
+        firstName = getFirstName(oldFileNameFirstPart)
+        lastName = getLastName(oldFileNameFirstPart) + " & "
 
-        firstWord = oldFileNameSplitted.split()[0]
-        print(firstWord)
-        if firstWord[-1] == ',':
-            print("A comma found!")
-            lastNameSecondAuthor = firstWord[:-1]
-            firstNameSecondAuthor = " & " + oldFileNameSplitted.split()[1]
-        else:
-            firstNameSecondAuthor = firstWord
-            lastNameSecondAuthor = oldFileNameSplitted.split()[1]
     else:
         lastNameSecondAuthor = ""
         firstNameSecondAuthor = ""
+        firstName = getFirstName(oldFileName)
+        lastName = getLastName(oldFileName)
 
-
-    firstName = getFirstName(oldFileName)
-    lastName = getLastName(oldFileName)
 
     print("First name: " + firstName)
     print("Last name: " + lastName)
