@@ -29,7 +29,17 @@ def getLastName(filename):
         return firstWord[:-1]
     else:
         return filename.split(' ')[1]
-    
+
+def getBookTitle(filename):
+    title = filename.split("-", 1)[1]
+    title = title.split(".epub", 1)[0]
+    print("Book title: " + title)
+
+    # remove from which year the book is from
+    title = re.sub("\([0-9][0-9][0-9][0-9]\)",'', title)
+    print("Book title(removed year): " + title)
+    title = re.sub("(epub)",'', title)    
+    return title
 # start of program
 
 # for each epub file in location
@@ -68,12 +78,8 @@ for name in glob.glob(folderLocation + '*.epub'):
     # print("Last name second author: " + lastNameSecondAuthor)
     
     # Get the book title
-    bookTitleWithExtention = oldFileName.split("-", 1)[1]
-    bookTitle = bookTitleWithExtention.split(".epub", 1)[0]
-    print("Book title: " + bookTitle)
-    # remove from which year the book is from
-    bookTitle = re.sub("\([0-9][0-9][0-9][0-9]\)",'', bookTitle)
-    print("Book title(removed year): " + bookTitle)
+    bookTitle = getBookTitle(oldFileName)
+
 
     if multipleAuthors == True:
         print("First name second author: " + firstNameSecondAuthor)
