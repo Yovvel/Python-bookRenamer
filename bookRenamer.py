@@ -21,7 +21,7 @@ def getFirstName(fileName):
         firstName = fileName.split("-",1)[0]
         return firstName.split(",",1)[1]
     else:
-        return firstWord
+        return firstWord + " "
 
 def getLastName(filename):
     firstWord = filename.split()[0]
