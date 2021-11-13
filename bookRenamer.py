@@ -34,12 +34,15 @@ def getBookTitle(filename):
     title = filename.split("-", 1)[1]
     title = title.split(".epub", 1)[0]
     print("Book title: " + title)
-
     # remove from which year the book is from
     title = re.sub("\([0-9][0-9][0-9][0-9]\)",'', title)
     print("Book title(removed year): " + title)
     title = re.sub("(epub)",'', title)    
     return title
+
+def writeFile():
+    file = open("file.txt", "a")
+    file.write("yes!")
 # start of program
 
 # for each epub file in location
@@ -91,7 +94,7 @@ for name in glob.glob(folderLocation + '*.epub'):
     print("New file name: " + newFileName)
 
     #os.rename(folderLocation + oldFileName, folderLocation + firstName + " " + lastName + " - " + bookTitle + ".epub")
-
+    writeFile()
 
 
 
