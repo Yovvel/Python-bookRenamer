@@ -3,15 +3,17 @@
 import os
 import glob
 import re
+from datetime import date
 
 # Renaming the file
 #os.rename(old_name, new_name)
-folderLocation  = 'C:\\Scripts\\pythontestfiles\\'
+bookLocation  = 'C:\\Scripts\\pythontestfiles\\'
+documentLocation = 'C:\\Scripts\\pythontestfiles\\'
 
 # Functions
 def getFileName(name):
     # function to get the filename without it's location
-    return name[len(folderLocation):]
+    return name[len(bookLocation):]
 
 def getFirstName(fileName):
     # When the filename layout is as followed: Lastname, Firstname - bookname,
@@ -40,13 +42,13 @@ def getBookTitle(filename):
     title = re.sub("(epub)",'', title)    
     return title
 
-def writeFile():
-    file = open("file.txt", "a")
-    file.write("yes!")
 # start of program
-
+today = date.today()
+today = str(today)
+file = open(documentLocation + "Log\\" + today + ".txt", "a")
+file.write( "-" * 50 + "\n")
 # for each epub file in location
-for name in glob.glob(folderLocation + '*.epub'):
+for name in glob.glob(bookLocation + '*.epub'):
     print("-" * 100)
     
     # get  current filename
@@ -90,12 +92,12 @@ for name in glob.glob(folderLocation + '*.epub'):
         newFileName = firstName + lastName + firstNameSecondAuthor +  lastNameSecondAuthor + " -" + bookTitle
     else:
         newFileName = firstName + lastName + " -" + bookTitle
-
+    file.write(newFileName + "\n")
     print("New file name: " + newFileName)
 
     #os.rename(folderLocation + oldFileName, folderLocation + firstName + " " + lastName + " - " + bookTitle + ".epub")
-    writeFile()
+    
 
 
-
+print(date.today())
 print("-" * 100)
