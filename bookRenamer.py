@@ -21,7 +21,8 @@ def getFirstName(fileName):
     firstWord = fileName.split()[0]
     if firstWord[-1] == ',':
         firstName = fileName.split("-",1)[0]
-        return firstName.split(",",1)[1]
+        firstName = firstName.split(",",1)[1]
+        return firstName[1:]
     else:
         return firstWord + " "
 
