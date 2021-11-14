@@ -42,18 +42,20 @@ def getBookTitle(filename):
     title = re.sub("(epub)",'', title)    
     return title
 
+
 # start of program
 today = date.today()
 today = str(today)
 file = open(documentLocation + "Log\\" + today + ".txt", "a")
-file.write( "-" * 50 + "\n")
+
 # for each epub file in location
 for name in glob.glob(bookLocation + '*.epub'):
     print("-" * 100)
     
     # get  current filename
     oldFileName = getFileName(name)
-    print("filename: " + oldFileName)  
+    print("filename: " + oldFileName)
+  
 
     # if there are more authors
     if(re.search("&",oldFileName)):
@@ -92,12 +94,14 @@ for name in glob.glob(bookLocation + '*.epub'):
         newFileName = firstName + lastName + firstNameSecondAuthor +  lastNameSecondAuthor + " -" + bookTitle
     else:
         newFileName = firstName + lastName + " -" + bookTitle
-    file.write(newFileName + "\n")
+    
     print("New file name: " + newFileName)
 
     #os.rename(folderLocation + oldFileName, folderLocation + firstName + " " + lastName + " - " + bookTitle + ".epub")
-    
+    file.write( "-" * 50 + "\n")
+    file.write("= Originele bestandsnaam:\n     " + oldFileName + "\n")
+    file.write("= Nieuwe bestandsnaam:\n    " + newFileName + "\n")
 
 
-print(date.today())
+print("Datum: " + str(date.today()))
 print("-" * 100)
